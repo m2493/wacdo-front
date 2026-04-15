@@ -4,6 +4,7 @@ import api from "../../api/axios";
 import Modal from "../../components/Modal";
 import ListWithFilter from "../../components/ListWithFilter";
 import Card from "../../components/Card";
+import AssignCollaboratorForm from "../../components/forms/AssignCollaboratorForm";
 
 export default function RestaurantDetailPage() {
   const { id } = useParams();
@@ -49,7 +50,7 @@ export default function RestaurantDetailPage() {
         collaboratorId: data.collaboratorId,
         restaurantId: Number(id),
         jobId: data.jobId,
-        startDate: data.startDate
+        startDateAffectation: data.startDateAffectation 
       });
 
       setShowAssignModal(false);
@@ -89,7 +90,7 @@ export default function RestaurantDetailPage() {
       <ListWithFilter
         items={showHistory ? history : affectations}
         filterFields={[
-          { name: "collaboratorName", placeholder: "Nom" },
+          { name: "collaboratorLastName", placeholder: "Nom" },
           { name: "jobTitle", placeholder: "Poste" },
           { name: "startDate", placeholder: "Date début", type: "date" }
         ]}
