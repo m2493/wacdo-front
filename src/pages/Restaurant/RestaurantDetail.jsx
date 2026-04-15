@@ -26,6 +26,9 @@ export default function RestaurantDetailPage() {
       setRestaurant(resRestaurant.data);
 
       const resAffectations = await api.get(`/api/affectations/restaurant/${id}/current`);
+
+      console.log("RAW AFFECTATIONS =", resAffectations.data);
+
       setAffectations(resAffectations.data);
 
     } catch (err) {
@@ -93,9 +96,9 @@ export default function RestaurantDetailPage() {
         renderItem={a => (
           <Card
             key={a.id}
-            title={a.collaboratorName}
-            subtitle={`${a.jobTitle} - ${a.startDate} ${a.endDate ? "→ " + a.endDate : ""}`}
-          />
+            title={`${a.collaboratorFirstName} ${a.collaboratorLastName}`.trim() || a.collaboratorEmail}
+            subtitle={`${a.jobTitle} - ${a.startDateAffectation} ${a.endDateAffectation ? "→ " + a.endDateAffectation : ""}`}
+        />
         )}
       />
 
