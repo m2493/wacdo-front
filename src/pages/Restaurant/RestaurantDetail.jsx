@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../../api/axios";
 import Modal from "../../components/Modal";
 import ListWithFilter from "../../components/ListWithFilter";
 import Card from "../../components/Card";
@@ -22,10 +22,10 @@ export default function RestaurantDetailPage() {
 
   const fetchData = async () => {
     try {
-      const resRestaurant = await axios.get(`/api/restaurants/${id}`);
+      const resRestaurant = await api.get(`/api/restaurants/${id}`);
       setRestaurant(resRestaurant.data);
 
-      const resAffectations = await axios.get(`/api/affectations/restaurant/${id}/current`);
+      const resAffectations = await api.get(`/api/affectations/restaurant/${id}/current`);
       setAffectations(resAffectations.data);
 
     } catch (err) {
@@ -36,13 +36,13 @@ export default function RestaurantDetailPage() {
   };
 
   const loadHistory = async () => {
-    const res = await axios.get("/api/affectations");
+    const res = await api.get("/api/affectations");
     setHistory(res.data.filter(a => a.restaurantId === Number(id)));
   };
 
   const handleAssign = async (data) => {
     try {
-      await axios.post("/api/affectations", {
+      await api.post("/api/affectations", {
         collaboratorId: data.collaboratorId,
         restaurantId: Number(id),
         jobId: data.jobId,

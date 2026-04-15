@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+/*import axios from "axios";*/
+import api from "../../api/axios";
 import ListWithFilter from "../../components/ListWithFilter";
 import Card from "../../components/Card";
 
@@ -12,7 +13,7 @@ export default function RestaurantListPage() {
   useEffect(() => {
     async function fetchRestaurants() {
       try {
-        const res = await axios.get("/api/restaurants");
+        const res = await api.get("/api/restaurants");
         const data = typeof res.data === "string"
   ? JSON.parse(res.data)
   : res.data;
